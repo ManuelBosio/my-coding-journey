@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Customizable Calculator</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background-color: var(--bg-color);
+            font-family: var(--font-family);
+        }
+        .calculator {
+            width: var(--calc-width);
+            padding: 20px;
+            background: var(--calc-bg);
+            border-radius: var(--border-radius);
+            box-shadow: var(--box-shadow);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        .display {
+            width: calc(100% - 20px);
+            height: 50px;
+            font-size: 2em;
+            text-align: right;
+            background: var(--display-bg);
+            color: var(--display-color);
+            border: none;
+            margin-bottom: 10px;
+            padding: 10px;
+            border-radius: var(--button-radius);
+        }
+        .buttons {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 10px;
+        }
+        button {
+            padding: 15px;
+            font-size: 1.5em;
+            border: none;
+            border-radius: var(--button-radius);
+            background: var(--button-bg);
+            color: var(--button-color);
+            cursor: pointer;
+        }
+        button:hover {
+            background: var(--button-hover);
+        }
+    </style>
+</head>
+<body>
+    <div class="calculator">
+        <input type="text" class="display" id="display" disabled>
+        <div class="buttons">
+            <button onclick="clearDisplay()">C</button>
+            <button onclick="appendValue('(')">(</button>
+            <button onclick="appendValue(')')">)</button>
+            <button onclick="appendValue('/')">/</button>
+            <button onclick="appendValue('7')">7</button>
+            <button onclick="appendValue('8')">8</button>
+            <button onclick="appendValue('9')">9</button>
+            <button onclick="appendValue('*')">*</button>
+            <button onclick="appendValue('4')">4</button>
+            <button onclick="appendValue('5')">5</button>
+            <button onclick="appendValue('6')">6</button>
+            <button onclick="appendValue('-')">-</button>
+            <button onclick="appendValue('1')">1</button>
+            <button onclick="appendValue('2')">2</button>
+            <button onclick="appendValue('3')">3</button>
+            <button onclick="appendValue('+')">+</button>
+            <button onclick="appendValue('0')">0</button>
+            <button onclick="appendValue('.')">.</button>
+            <button onclick="calculate()">=</button>
+            <button onclick="appendValue('**')">^</button>
+            <button onclick="sqrt()">√</button>
+        </div>
+    </div>
+    <script>
+        // Customization Variables
+        document.documentElement.style.setProperty('--bg-color', '#f4f4f4');
+        document.documentElement.style.setProperty('--calc-width', '300px');
+        document.documentElement.style.setProperty('--calc-bg', '#fff');
+        document.documentElement.style.setProperty('--border-radius', '10px');
+        document.documentElement.style.setProperty('--box-shadow', '0px 4px 10px rgba(0, 0, 0, 0.2)');
+        document.documentElement.style.setProperty('--font-family', 'Arial, sans-serif');
+        document.documentElement.style.setProperty('--display-bg', '#222');
+        document.documentElement.style.setProperty('--display-color', '#fff');
+        document.documentElement.style.setProperty('--button-bg', '#007bff');
+        document.documentElement.style.setProperty('--button-color', '#fff');
+        document.documentElement.style.setProperty('--button-hover', '#0056b3');
+        document.documentElement.style.setProperty('--button-radius', '5px');
+        
+        function appendValue(value) {
+            document.getElementById('display').value += value;
+        }
+        function clearDisplay() {
+            document.getElementById('display').value = '';
+        }
+        function calculate() {
+            try {
+                document.getElementById('display').value = eval(document.getElementById('display').value);
+            } catch (e) {
+                alert('Invalid Expression');
+            }
+        }
+        function sqrt() {
+            try {
+                document.getElementById('display').value = Math.sqrt(eval(document.getElementById('display').value));
+            } catch (e) {
+                alert('Invalid Expression');
+            }
+        }
+    </script>
+</body>
+</html>
